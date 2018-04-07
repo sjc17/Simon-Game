@@ -50,6 +50,7 @@ function clickBlue() {
 function lightUpGreen() {
     console.log("lightUpGreen()");
     document.getElementById('all-buttons').style.borderLeftColor = 'green';
+    audioGreen.load();
     audioGreen.play();
     setTimeout(() => {
         document.getElementById('all-buttons').style.borderLeftColor = 'darkgreen';
@@ -58,6 +59,7 @@ function lightUpGreen() {
 function lightUpRed() {
     console.log("lightUpRed()");
     document.getElementById('all-buttons').style.borderTopColor = 'red';
+    audioRed.load();
     audioRed.play();
     setTimeout(() => {
         document.getElementById('all-buttons').style.borderTopColor = 'darkred';
@@ -66,6 +68,7 @@ function lightUpRed() {
 function lightUpYellow() {
     console.log("lightUpYellow()");
     document.getElementById('all-buttons').style.borderBottomColor = 'yellow';
+    audioYellow.load();
     audioYellow.play();
     setTimeout(() => {
         document.getElementById('all-buttons').style.borderBottomColor = 'rgb(173, 173, 0)';    
@@ -74,6 +77,7 @@ function lightUpYellow() {
 function lightUpBlue() {
     console.log("lightUpBlue()");
     document.getElementById('all-buttons').style.borderRightColor = 'blue'; 
+    audioBlue.load();
     audioBlue.play();
     setTimeout(() => {
         document.getElementById('all-buttons').style.borderRightColor = 'darkblue';
