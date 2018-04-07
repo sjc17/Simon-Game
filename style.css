@@ -47,6 +47,7 @@ body {
     margin: auto;
     margin-top: 10px;
     margin-bottom: 30px;
+    user-select: none;
 }
 
 #strict-parent {
