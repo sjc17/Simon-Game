@@ -37,6 +37,10 @@ body {
     flex-direction: column;
 }
 
+#displayer {
+    user-select: none;
+}
+
 #new-game {
     font-family: 'Roboto', sans-serif;
     width: 100px;
@@ -54,6 +58,7 @@ body {
 #strict-mode {
     line-height: 24px;
     margin-right: 4px;
+    user-select: none;
 }
 
 #strict-switch {
