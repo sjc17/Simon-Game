@@ -151,24 +151,8 @@ function nextStep() {
 //
 
 
-console.log(clientRects);
+    
 
-    if (distanceFromMiddle > middleWidth/2 && clickable) {
-        if (element.clientX<midPointHorizontal && element.clientY<midPointVertical) {
-            clickGreen();
-        }
-        else if (element.clientX>midPointHorizontal && element.clientY<midPointVertical) {
-            clickRed();
-        }
-        else if (element.clientX<midPointHorizontal && element.clientY>midPointVertical) {
-            clickYellow();
-        }
-        else if (element.clientX>midPointHorizontal && element.clientY>midPointVertical) {
-            clickBlue();
-        }
-    }
-});
-*/
 document.getElementById('new-game').addEventListener('click', () => {
     newGame();
 });
@@ -219,5 +203,21 @@ document.getElementById('all-buttons').addEventListener('click', (element) => {
     console.log('midPointVertical '+midPointVertical);
     console.log("x: "+x+". y: "+y);/*
     console.log("distance from middle: "+distanceFromMiddle);
-    console.log("middle radius: "+middleWidth/2);    
+    console.log("middle radius: "+middleWidth/2);   
+
+    if (distanceFromMiddle > middleWidth/2 && clickable) {
+        if (element.clientX<midPointHorizontal && element.clientY<midPointVertical) {
+            clickGreen();
+        }
+        else if (element.clientX>midPointHorizontal && element.clientY<midPointVertical) {
+            clickRed();
+        }
+        else if (element.clientX<midPointHorizontal && element.clientY>midPointVertical) {
+            clickYellow();
+        }
+        else if (element.clientX>midPointHorizontal && element.clientY>midPointVertical) {
+            clickBlue();
+        }
+    }
+}); 
 */
