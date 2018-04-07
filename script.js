@@ -18,7 +18,6 @@ let myButtonPresses = [];
 let level;
 let strict = false;
 let strictGameOver = false;
-let timer;
 
 //
 // Functions
@@ -26,75 +25,59 @@ let timer;
 function clickGreen() {
     console.log("clickGreen()");
     clickable = false;
-    clearTimeout(timer);
     checkUserInput(0);
     lightUpGreen(USER_CLICKED);
 }
 function clickRed() {
     console.log("clickRed()");
     clickable = false;
-    clearTimeout(timer);
     checkUserInput(1);
     lightUpRed(USER_CLICKED);
 }
 function clickYellow() {
     console.log("clickYellow()");
     clickable = false;
-    clearTimeout(timer);
     checkUserInput(2);
     lightUpYellow(USER_CLICKED);
 }
 function clickBlue() {
     console.log("clickBlue()");
     clickable = false;
-    clearTimeout(timer);
     checkUserInput(3);
     lightUpBlue(USER_CLICKED);
 }
 
-function lightUpGreen(userClicked) {
-    console.log("lightUpGreen("+userClicked+")");
+function lightUpGreen() {
+    console.log("lightUpGreen()");
     document.getElementById('all-buttons').style.borderLeftColor = 'green';
     audioGreen.play();
     setTimeout(() => {
-        if (userClicked) {
-            clickable = true;
-        }
         document.getElementById('all-buttons').style.borderLeftColor = 'darkgreen';
-    }, 600);
+    }, 500);
 }
-function lightUpRed(userClicked) {
-    console.log("lightUpRed("+userClicked+")");
+function lightUpRed() {
+    console.log("lightUpRed()");
     document.getElementById('all-buttons').style.borderTopColor = 'red';
     audioRed.play();
     setTimeout(() => {
-        if (userClicked) {
-            clickable = true;
-        }
         document.getElementById('all-buttons').style.borderTopColor = 'darkred';
-    }, 600);
+    }, 500);
 }
-function lightUpYellow(userClicked) {
-    console.log("lightUpYellow("+userClicked+")");
+function lightUpYellow() {
+    console.log("lightUpYellow()");
     document.getElementById('all-buttons').style.borderBottomColor = 'yellow';
     audioYellow.play();
     setTimeout(() => {
-        if (userClicked) {
-            clickable = true;
-        }
         document.getElementById('all-buttons').style.borderBottomColor = 'rgb(173, 173, 0)';    
-    }, 600);
+    }, 500);
 }
-function lightUpBlue(userClicked) {
-    console.log("lightUpBlue("+userClicked+")");
+function lightUpBlue() {
+    console.log("lightUpBlue()");
     document.getElementById('all-buttons').style.borderRightColor = 'blue'; 
     audioBlue.play();
     setTimeout(() => {
-        if (userClicked) {
-            clickable = true;
-        }
         document.getElementById('all-buttons').style.borderRightColor = 'darkblue';
-    }, 600);
+    }, 500);
 }
 
 function newGame() {
@@ -103,13 +86,39 @@ function newGame() {
     level = 1;
     buttonSeries = [Math.floor(Math.random() * 4)];
     myButtonPresses = [];  
+    document.getElementById('displayer').innerHTML = "Level "+level;
     showButtonSeries();
-    waitForResponse();
 }
 
 function showButtonSeries() {
-    console.log("showButtonSeries()");
-    console.log(buttonSeries);
+    clickable = false;
+    setTimeout(()=>{
+        showNextButton(0);
+    }, 700);
+}
+
+function showNextButton(index) {
+    setTimeout(() => {
+        switch (buttonSeries[index]) {
+            case 0:
+                lightUpGreen();
+                break;
+            case 1:
+                lightUpRed();
+                break;
+            case 2:
+                lightUpYellow();
+                break;
+            case 3:
+                lightUpBlue();
+                break;
+            default:
+                return waitForResponse();
+        }
+        setTimeout(() => {
+            showNextButton(index+1);
+        }, 500);
+    }, 200);    
 }
 
 function waitForResponse() {
@@ -125,6 +134,16 @@ function checkUserInput(num) {
     myButtonPresses.push(num);
     if (num!==buttonSeries[myButtonPresses.length-1]) {
         console.log('Wrong answer!');
+        myButtonPresses = [];
+        clickable = false;
+        if (strictGameOver) {
+            newGame();
+        }
+        else {
+            setTimeout(() => {
+                showButtonSeries();
+            }, 500);
+        }
     }
     else {
         console.log('Right answer!');
@@ -135,19 +154,26 @@ function checkUserInput(num) {
 function nextStep() {
     console.log("nextStep()");
     if (myButtonPresses.length === buttonSeries.length) {
-        if (level === 5) {
+        if (level === 20) {
             console.log("You win");
+            document.getElementById('displayer').innerHTML = "You win!!!";
+            setTimeout(() => {            
+                newGame();
+            }, 5000);
         }
         else {
             level++;
             buttonSeries.push(Math.floor(Math.random() * 4));
             console.log("Level: "+level);
+            document.getElementById('displayer').innerHTML = "Level "+level;
             myButtonPresses = [];
             showButtonSeries();
         }
     }
-    clickable = true;
-    waitForResponse();
+    else {
+        clickable = true;
+        waitForResponse();
+    }
 }
 
 document.getElementById('all-buttons').addEventListener('mousedown', (element) => {
@@ -179,7 +205,7 @@ document.getElementById('all-buttons').addEventListener('mousedown', (element) =
     console.log("Mid point horizontal: "+midPointHorizontal);
     console.log("Mid point vertical: "+midPointVertical);*/
     
-    if (distanceFromMiddle > middleWidth/2) {
+    if (distanceFromMiddle > middleWidth/2 && clickable) {
         if (element.clientX<midPointHorizontal && element.clientY<midPointVertical) {
             clickGreen();
         }
@@ -197,4 +223,9 @@ document.getElementById('all-buttons').addEventListener('mousedown', (element) =
 
 document.getElementById('new-game').addEventListener('click', () => {
     newGame();
+});
+
+document.getElementById('strict-switch').addEventListener('change', () => {
+    strictGameOver = !strictGameOver;
+    console.log('strict game over is now '+strictGameOver)
 });
