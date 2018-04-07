@@ -9,24 +9,57 @@ body {
     height: 500px;
 }
 
-#all-buttons {
-    width: 300px;
-    height: 300px;
+#circle {
+    position: relative;
+    background-color: white;
+    width: 500px;
+    height: 500px;
+    border-radius: 100%;
+    margin: auto;
+}
+
+.all-buttons {
     position: absolute;
-    border-left: 100px solid darkgreen;
-    border-right: 100px solid darkblue;
-    border-top: 100px solid darkred;
-    border-bottom: 100px solid rgb(173, 173, 0);
-    transform: rotate(45deg);
+    left: 250px;
+    right: 250px;
+    width: 0px;
+    height: 0px;
     border-radius: 50%;
-    margin-top: 150px;
-    margin-left: 150px;
+    border-left: 200px solid transparent;
+    border-right: 200px solid transparent;
+}
+
+#green {    
+    border-top: 200px solid darkgreen;
+    transform: rotate(-45deg);
+}
+
+#red {
+    border-top: 200px solid darkred;
+    transform: rotate(45deg);
+}
+
+#yellow {
+    border-top: 200px solid rgb(173, 173, 0);
+    transform: rotate(-135deg);
+}
+
+#blue {
+    border-top: 200px solid darkblue;
+    transform: rotate(135deg);
 }
 
 #middle-area {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border: solid black;
+    margin: auto;
+    
     background-color: lightslategray;
     width: 300px;
     height: 300px;
     border-radius: 100%;
 }
+
