@@ -171,13 +171,13 @@ document.getElementById('all-buttons').addEventListener('mousedown', (element) =
     let distanceFromMiddle = Math.pow(
         Math.pow(element.clientX-midPointHorizontal,2)+
         Math.pow(element.clientY-midPointVertical,2),0.5);
-
+/*
     console.log("x: "+x);
     console.log("y: "+y);
 
     console.log("Distance from middle: "+distanceFromMiddle);
     console.log("Mid point horizontal: "+midPointHorizontal);
-    console.log("Mid point vertical: "+midPointVertical);
+    console.log("Mid point vertical: "+midPointVertical);*/
     
     if (distanceFromMiddle > middleWidth/2) {
         if (element.clientX<midPointHorizontal && element.clientY<midPointVertical) {
@@ -193,4 +193,8 @@ document.getElementById('all-buttons').addEventListener('mousedown', (element) =
             clickBlue();
         }
     }
+});
+
+document.getElementById('new-game').addEventListener('click', () => {
+    newGame();
 });
