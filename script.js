@@ -149,16 +149,18 @@ function nextStep() {
 //
 // Inputs
 //
-
-
-    
+document.getElementById('blue').addEventListener('click', function() {
+    console.log('clicked blue');
+    clickGreen();
+});
 
 document.getElementById('new-game').addEventListener('click', () => {
     newGame();
-});
+});   
 
+/*
 console.log(getComputedStyle(document.getElementById('middle-area')));
-console.log(document.getElementById('middle-area').getClientRects());
+console.log(document.getElementById('middle-area').getClientRects());*/
 
 /*
 document.getElementById('all-buttons').addEventListener('click', (element) => {
